@@ -46,8 +46,15 @@ async function guard(fn) {
   try {
     return await fn();
   } catch (error) {
-    if (error instanceof ApiError) toast(error.message);
-    else toast(t("common.errorGeneric"));
+    if (error instanceof ApiError) {
+      // Показываем код ошибки как есть — не прячем его за общей фразой,
+      // чтобы можно было понять причину, а не тыкаться вслепую.
+      toast(error.displayMessage);
+      console.error("[api]", error.code, error.status, error.message, error.cause ?? "");
+    } else {
+      toast(`[JS] ${error?.message ?? error}`);
+      console.error("[app]", error);
+    }
     return null;
   }
 }
@@ -107,6 +114,30 @@ function profileEditScreen() {
     return row;
   };
 
+  const name = el("input", {
+    class: "input",
+    maxlength: String(CONFIG.MAX_NAME),
+    placeholder: t("profile.namePlaceholder"),
+  });
+  name.value = p?.name ?? "";
+
+  const city = el("input", {
+    class: "input",
+    maxlength: String(CONFIG.MAX_CITY),
+    placeholder: t("profile.cityPlaceholder"),
+  });
+  city.value = p?.city ?? "";
+
+  const age = el("input", {
+    class: "input",
+    type: "number",
+    inputmode: "numeric",
+    min: String(CONFIG.MIN_AGE),
+    max: String(CONFIG.MAX_AGE),
+    placeholder: t("profile.agePlaceholder"),
+  });
+  age.value = p?.age ?? "";
+
   const bio = el("textarea", {
     class: "textarea",
     maxlength: String(CONFIG.MAX_BIO),
@@ -146,10 +177,23 @@ function profileEditScreen() {
     onclick: async () => {
       if (!ownGender) return toast(t("profile.ownGenderLabel"));
       if (bio.value.trim().length < CONFIG.MIN_BIO) return toast(t("profile.bioMinHint"));
+
+      let ageValue = null;
+      if (age.value.trim() !== "") {
+        const parsed = Number(age.value);
+        if (!Number.isInteger(parsed) || parsed < CONFIG.MIN_AGE || parsed > CONFIG.MAX_AGE) {
+          return toast(t("profile.ageInvalid"));
+        }
+        ageValue = parsed;
+      }
+
       save.disabled = true;
       const saved = await guard(() => api.saveMyProfile({
         own_gender: ownGender,
         seeking_gender: seeking,
+        name: name.value.trim() || null,
+        city: city.value.trim() || null,
+        age: ageValue,
         bio_text: bio.value.trim(),
         appearance_text: appearance.value.trim() || null,
         tags: tags.value.split(",").map((s) => s.trim()).filter(Boolean),
@@ -181,6 +225,24 @@ function profileEditScreen() {
       el("span", { class: "field__label", text: t("profile.seekingLabel") }),
       el("p", { class: "field__hint", text: t("profile.seekingHint") }),
       genderButtons(seeking, (v) => { seeking = v; }, true),
+    ]),
+
+    el("div", { class: "field" }, [
+      el("label", { class: "field__label", text: t("profile.nameLabel") }),
+      el("p", { class: "field__hint", text: t("profile.nameHint") }),
+      name,
+    ]),
+
+    el("div", { class: "field" }, [
+      el("label", { class: "field__label", text: t("profile.cityLabel") }),
+      el("p", { class: "field__hint", text: t("profile.cityHint") }),
+      city,
+    ]),
+
+    el("div", { class: "field" }, [
+      el("label", { class: "field__label", text: t("profile.ageLabel") }),
+      el("p", { class: "field__hint", text: t("profile.ageHint") }),
+      age,
     ]),
 
     el("div", { class: "field" }, [
@@ -284,6 +346,7 @@ async function feedScreen() {
       class: "feed-item",
       onclick: () => profileReadScreen(item.id),
     }, [
+      profileHeaderLine(item) ? el("p", { class: "feed-item__header", text: profileHeaderLine(item) }) : null,
       el("p", { class: "feed-item__excerpt", text: excerpt(item.bio_text, 220) }),
       el("div", { class: "feed-item__meta" },
         (item.tags ?? []).slice(0, 5).map((tag) => el("span", { class: "chip chip--muted", text: tag }))),
@@ -300,6 +363,12 @@ async function feedScreen() {
 function excerpt(text, limit) {
   const clean = (text ?? "").trim();
   return clean.length > limit ? `${clean.slice(0, limit).trimEnd()}…` : clean;
+}
+
+/** "Аня, 27, Тбилиси" — все поля опциональны, пропущенные просто выпадают. */
+function profileHeaderLine(profile) {
+  const parts = [profile.name, profile.age, profile.city].filter((v) => v !== null && v !== undefined && v !== "");
+  return parts.join(", ");
 }
 
 function filterPanel() {
@@ -412,6 +481,10 @@ async function profileReadScreen(profileId) {
 
   render(screen([
     el("button", { class: "back-link", text: `← ${t("common.back")}`, onclick: () => feedScreen() }),
+
+    profileHeaderLine(profile)
+      ? el("p", { class: "profile-read__header", text: profileHeaderLine(profile) })
+      : null,
 
     el("section", { class: "profile-read__section" }, [
       el("p", { class: "label", text: t("read.about") }),

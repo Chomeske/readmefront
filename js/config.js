@@ -20,6 +20,10 @@ export const CONFIG = {
   MAX_APPEARANCE: 2000,
   MAX_POST: 5000,
   MAX_MESSAGE: 4000,
+  MAX_NAME: 80,
+  MAX_CITY: 80,
+  MIN_AGE: 18,
+  MAX_AGE: 99,
 
   // ТОЛЬКО для локальной отладки в обычном браузере, без Telegram.
   // Должно совпадать с DEV_AUTH_BYPASS=1 на бэкенде.
