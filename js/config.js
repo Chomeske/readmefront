@@ -5,7 +5,7 @@
 
 export const CONFIG = {
   // Адрес бэкенда на Render, без слэша на конце.
-  API_BASE: "https://your-service.onrender.com",
+  API_BASE: "https://readme-mmc1.onrender.com",
 
   // Язык по умолчанию, если у пользователя ещё нет выбора и Telegram молчит.
   DEFAULT_LANG: "ru",
