@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "languageName": "English"
+  },
+  "welcome": {
+    "title": "Here, someone actually reads your profile",
+    "lede": "We hope~ At the very least, you can't send a like without scrolling to the end of the text. No photos at all: only what you write about yourself.",
+    "privacy": "And remember: this app doesn't store your data all that securely. Don't write anything you couldn't survive in someone else's hands.",
+    "start": "Write my profile"
+  },
+  "tabs": {
+    "feed": "Feed",
+    "matches": "Likes",
+    "games": "Games",
+    "me": "Me",
+    "chat": "Chats"
+  },
+  "profile": {
+    "editTitle": "Your profile",
+    "ownGenderLabel": "Your own gender",
+    "ownGenderHint": "Careful! This is YOUR gender, not the one you're looking for. So you don't turn up in front of people you'd rather avoid, heh~",
+    "seekingLabel": "Who you're looking for",
+    "seekingHint": "You can leave this empty — then the feed shows everyone. Limiting who you talk to is a strange thing to do.",
+    "genderFemale": "Female",
+    "genderMale": "Male",
+    "seekingAny": "Anyone",
+    "bioLabel": "About you",
+    "bioHint": "What keeps you up, what makes you tick, and do you even like that expression? Your take on vaccines, science, and on three funnily similar letter combos: GMO, HOMO, HOMEO.",
+    "bioPlaceholder": "Write it as it is. This is what people will read.",
+    "appearanceLabel": "Looks, in words",
+    "appearanceHint": "Optional. If you feel like it, describe yourself however you want. Free form, no photos here.",
+    "appearancePlaceholder": "For example: tall, permanently in black, worried eyebrows.",
+    "tagsLabel": "Interests",
+    "tagsHint": "Comma separated. People find you in the feed by these — and you find yours the same way.",
+    "tagsPlaceholder": "noir, trail running, gintama",
+    "save": "Save profile",
+    "saved": "Saved",
+    "questionsTitle": "Compatibility questions",
+    "questionsLede": "Answering is optional, but these answers are what people read most carefully.",
+    "answerPlaceholder": "Answer in your own words",
+    "answerSave": "Save answer",
+    "deleteProfile": "Delete profile",
+    "deleteConfirm": "Delete the whole profile? This can't be undone.",
+    "hiddenNotice": "This profile is hidden from the feed after a report. Edit and save it to bring it back.",
+    "bioMinHint": "At least 300 characters — shorter than that isn't a profile, it's a classified ad.",
+    "bioTooShort": "{n} more characters to go"
+  },
+  "feed": {
+    "title": "Feed",
+    "empty": "Nobody here yet. Either everyone's taken, or the filters are too strict.",
+    "filters": "Filters",
+    "filterTags": "Tags",
+    "filterKeywords": "Words in the text",
+    "filterGender": "Gender",
+    "filterAny": "Any",
+    "filterApply": "Show",
+    "filterReset": "Reset",
+    "excludeLiked": "Hide people I already liked",
+    "needProfile": "Write your own profile first — reading others without one isn't fair."
+  },
+  "read": {
+    "about": "About",
+    "appearance": "Looks, in words",
+    "answers": "Answers",
+    "gateHint": "The like button appears once you've read to the end.",
+    "like": "Send a like",
+    "liked": "Like sent",
+    "unlike": "Take the like back",
+    "matched": "Mutual! You can exchange contacts now.",
+    "report": "Report"
+  },
+  "report": {
+    "title": "What's wrong with this profile?",
+    "empty_or_stub": "Empty or placeholder instead of text",
+    "not_about_person": "Ad, or text that isn't about a person",
+    "wrong_gender": "The stated gender looks wrong",
+    "abuse": "Insults or something unacceptable",
+    "send": "Send report",
+    "sent": "Report sent, we'll look at it by hand.",
+    "already": "You've already reported this profile."
+  },
+  "matches": {
+    "title": "Likes",
+    "empty": "Empty for now. A like becomes a match only when it's mutual.",
+    "consent": "Share my @username",
+    "consentPending": "You agreed. Waiting for them to agree too.",
+    "revoke": "Change my mind",
+    "contact": "Contact",
+    "openChat": "Message on Telegram"
+  },
+  "games": {
+    "title": "Text games",
+    "lede": "You can play with people you've matched with.",
+    "empty": "No one to play with yet — you need at least one match.",
+    "start": "Start",
+    "yourTurn": "Your turn",
+    "waiting": "Their turn",
+    "finished": "Game over",
+    "send": "Send",
+    "messagePlaceholder": "Your move"
+  },
+  "blog": {
+    "title": "Microblog",
+    "lede": "Short notes about what's going on. Everyone can see them, and they extend your profile.",
+    "placeholder": "What's new?",
+    "publish": "Publish",
+    "empty": "No posts yet.",
+    "delete": "Delete",
+    "filterTags": "Author's profile tags",
+    "filterKeywords": "Words from the author's profile",
+    "filterHint": "Filters look at the person's profile, not the post text: this is for finding people, not posts."
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Appearance",
+    "themeAuto": "Match Telegram",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "language": "Language",
+    "blog": "Microblog",
+    "openBlog": "Open"
+  },
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "errorGeneric": "Something went wrong. Try again.",
+    "errorNetwork": "The server isn't responding. Check your connection.",
+    "errorAuth": "The app couldn't confirm it's really you. Reopen it from Telegram.",
+    "errorRateLimit": "Too often. Wait a moment."
+  },
+  "chat": {
+    "title": "Conversations",
+    "empty": "No conversations yet. They start with a message or a comment on someone's paragraph.",
+    "placeholder": "Text only, no images here",
+    "send": "Send",
+    "localWarning": "Conversations are stored on this device only. Clear the app data and the history is gone for good.",
+    "commentOn": "Comment on a paragraph",
+    "openChat": "Open conversation",
+    "consentTitle": "Sharing contacts",
+    "consentHint": "Both of you have to agree. Until then your @username stays hidden.",
+    "consent": "Share my @username",
+    "consentPending": "You agreed. Waiting for them.",
+    "revoke": "Change my mind",
+    "needMatch": "Contact sharing opens after a mutual like.",
+    "writeTo": "Write"
+  },
+  "comment": {
+    "action": "Comment",
+    "title": "Comment on the selected part",
+    "placeholder": "What caught you in this paragraph?",
+    "send": "Send and start a conversation",
+    "sent": "Sent — the conversation is open."
+  }
+}

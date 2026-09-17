@@ -1,0 +1,50 @@
+/* ============================================================
+   ОБРАЗЕЦ ТЕМЫ — "Мох"
+   Формат, в котором будут продаваться платные наборы оформления.
+
+   Тема = один CSS-файл, который переопределяет переменные из
+   css/tokens.css. Больше ничего менять не нужно: вёрстка
+   (css/app.css) цветов вообще не знает.
+
+   Подключение — в index.html ПОСЛЕ tokens.css:
+     <link rel="stylesheet" href="./themes/_example-moss.css">
+
+   Если тема тянет свои шрифты — добавь <link> на шрифт туда же
+   и переопредели --font-reading / --font-ui здесь.
+   ============================================================ */
+
+:root {
+  --bg:            #E4E7DF;
+  --bg-sunken:     #DADED3;
+  --surface:       #EFF1EB;
+  --surface-edge:  #CBD1C3;
+
+  --ink:           #262B25;
+  --ink-soft:      #5C6659;
+  --ink-faint:     #8B9487;
+
+  --accent:        #4F6B4A;
+  --accent-ink:    #F4F6F1;
+  --accent-soft:   #C3D2BC;
+
+  --danger:        #7E4B3C;
+  --ok:            #4F6B4A;
+}
+
+[data-theme="dark"] {
+  --bg:            #1B211B;
+  --bg-sunken:     #151A15;
+  --surface:       #242B23;
+  --surface-edge:  #343D32;
+
+  --ink:           #E4E9E0;
+  --ink-soft:      #A3AF9E;
+  --ink-faint:     #7B8576;
+
+  --accent:        #9BBF92;
+  --accent-ink:    #1B211B;
+  --accent-soft:   #3C4A39;
+
+  --danger:        #C08A76;
+  --ok:            #9BBF92;
+}

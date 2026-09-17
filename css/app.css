@@ -1,0 +1,360 @@
+/* ============================================================
+   ВЁРСТКА
+   Здесь нет ни одного hex-цвета и ни одного названия шрифта —
+   всё берётся из tokens.css. Меняешь тему — этот файл не трогаешь.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding-bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Каркас --- */
+
+.screen {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-6);
+}
+
+.screen-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-2);
+}
+
+.screen-lede {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-5);
+  max-width: var(--measure);
+}
+
+/* --- Текст, который читают: анкеты, ответы, посты --- */
+
+.reading {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  max-width: var(--measure);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.reading + .reading { margin-top: var(--space-4); }
+
+.label {
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+  margin-bottom: var(--space-1);
+}
+
+/* --- Лента: записи разделены линиями, а не одинаковыми карточками --- */
+
+.feed-item {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--surface-edge);
+  cursor: pointer;
+}
+
+.feed-item:first-of-type { padding-top: var(--space-2); }
+.feed-item:last-of-type { border-bottom: none; }
+
+.feed-item__excerpt {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  margin: 0 0 var(--space-3);
+  max-width: var(--measure);
+}
+
+.feed-item__meta {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* --- Чипы тегов --- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 3px var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-size: var(--text-xs);
+  border: none;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+
+.chip--muted { background: var(--bg-sunken); color: var(--ink-soft); }
+.chip--removable::after { content: "×"; opacity: 0.6; }
+
+/* --- Кнопки --- */
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+  transition: opacity 120ms ease;
+}
+
+.btn:hover { opacity: 0.9; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn--quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--surface-edge);
+}
+
+.btn--danger { background: transparent; color: var(--danger); border-color: var(--surface-edge); }
+.btn--wide { width: 100%; }
+
+.btn-row { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+/* --- Поля ввода --- */
+
+.field { margin-bottom: var(--space-5); }
+
+.field__label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+}
+
+.field__hint {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-reading);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-3);
+  max-width: var(--measure);
+}
+
+.input, .textarea, .select {
+  width: 100%;
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  color: var(--ink);
+  background: var(--bg-sunken);
+  border: 1px solid var(--surface-edge);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.select { font-family: var(--font-ui); }
+.textarea { min-height: 140px; resize: vertical; }
+.input::placeholder, .textarea::placeholder { color: var(--ink-faint); }
+
+.counter { font-size: var(--text-xs); color: var(--ink-faint); text-align: right; margin-top: var(--space-1); }
+
+/* --- Выбор из вариантов (пол, кого ищем) --- */
+
+.choice-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+.choice {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-edge);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.choice[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+/* --- Экран чтения анкеты --- */
+
+.profile-read__section { margin-bottom: var(--space-6); }
+
+.qa__question {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-2);
+  max-width: var(--measure);
+}
+
+.qa + .qa { margin-top: var(--space-5); }
+
+/* Кнопка симпатии появляется только когда анкета дочитана до конца */
+.read-gate {
+  border-top: 1px solid var(--surface-edge);
+  padding-top: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.read-gate__hint {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  color: var(--ink-faint);
+  margin-bottom: var(--space-3);
+}
+
+.read-gate__actions {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 260ms ease, transform 260ms ease;
+  pointer-events: none;
+}
+
+.read-gate__actions.is-unlocked {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* --- Панели, диалоги, тосты --- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--surface-edge);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--tab-bar-height) + var(--space-4));
+  transform: translateX(-50%);
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--surface-edge);
+  box-shadow: var(--shadow-lift);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  max-width: 90vw;
+  z-index: 50;
+}
+
+.empty {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  color: var(--ink-soft);
+  max-width: var(--measure);
+  padding: var(--space-6) 0;
+}
+
+/* --- Нижняя навигация --- */
+
+.tab-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: calc(var(--tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: flex;
+  background: var(--surface);
+  border-top: 1px solid var(--surface-edge);
+  z-index: 40;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.tab[aria-current="page"] { color: var(--accent); font-weight: 600; }
+
+/* --- Игры --- */
+
+.game-log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.game-line {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  line-height: var(--leading-reading);
+  background: var(--surface);
+  border: 1px solid var(--surface-edge);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  max-width: var(--measure);
+}
+
+/* --- Настройки --- */
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--surface-edge);
+}
+
+.setting-row:last-child { border-bottom: none; }
+
+.back-link {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  padding: 0 0 var(--space-4);
+  cursor: pointer;
+}
